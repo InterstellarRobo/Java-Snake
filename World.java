@@ -2,14 +2,19 @@ import java.util.Arrays;
 
 public class World {
     private int[][] worldArray;
+    private boolean appleEaten = false;
 
     public World(int playSizeX, int playSizeY) {
         worldArray = new int[playSizeY + 2][playSizeX + 2];
 
+        initializeArray();
+        generateWalls(playSizeX + 2, playSizeY + 2);
+    }
+
+    private void initializeArray() {
         for (int y = 0; y < worldArray.length; y++) {
             Arrays.fill(worldArray[y], 0);
         }
-        generateWalls(playSizeX + 2, playSizeY + 2);
     }
 
     private void generateWalls(int gridSizeX, int gridSizey) {
@@ -47,5 +52,42 @@ public class World {
 
     public void setGameCoord(int x, int y, int val){
         worldArray[y + 1][x + 1] = val;
+    }
+
+    public void spawnApple() {
+        int appleX = (int) (Math.random() * this.gameWidth());
+        int appleY = (int) (Math.random() * this.gameHeight());
+
+        while (this.getGameCoord(appleX, appleY) != 0) {
+            appleX = (int) (Math.random() * this.gameWidth());
+            appleY = (int) (Math.random() * this.gameHeight());
+        }
+
+        this.setGameCoord(appleX, appleY, -2);
+    }
+
+    public void setAppleEaten() {
+        this.appleEaten = true;
+    }
+
+    public void resetAppleEaten() {
+        this.appleEaten = false;
+    }
+
+    public boolean checkAppleEaten() {
+        return this.appleEaten;
+    }
+
+    public void updateWorld() {
+        if (this.checkAppleEaten() == false) {
+            for (int x = 0; x < this.gameWidth(); x++) {
+                for (int y = 0; y < this.gameHeight(); y++) {
+                    int value = this.getGameCoord(x, y);
+                    if (value > 0) {
+                        this.setGameCoord(x, y, value - 1);
+                    }
+                }
+            }
+        }
     }
 }

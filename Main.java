@@ -1,11 +1,15 @@
 public class Main {
     public static void main(String[] args) {
-        World testWorld = new World(5, 5);
+        World testWorld = new World(15, 15);
         testWorld.printWorld();
         System.out.println();
-        World testWorld2 = new World(10, 3);
-        Snake world2Snake = new Snake(7, 1, 4, testWorld2);
-        Snake world2Snake2 = new Snake(5, 0, 6, testWorld2);
-        testWorld2.printWorld();
+        Snake snake = new Snake (9, 3, 5, testWorld);
+        testWorld.setGameCoord(9, 4, -2);
+        testWorld.printWorld();
+        System.out.println();
+        snake.moveSnakeHead(Direction.DOWN);
+        testWorld.updateWorld();
+        snake.placeSnakeHead();
+        testWorld.printWorld();
     }
 }
