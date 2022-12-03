@@ -1,0 +1,35 @@
+World {
+int worldArray
+
+void generateWalls
+void printWorld
+void renderWorld
+void updateWorld
+void spawnApple
+void setGameCoord
+int getGameCoord
+int gameHeight
+int gameWidth
+void endItAll
+}
+
+Snake {
+int headX
+int headY
+int length
+Direction d
+World w
+
+void genSnake()
+}
+
+Game Loop Steps:
+1. get user input
+2. move snakes heads (includes collision detection)
+3. updateWorld
+4. place snakes heads
+5. render world (take in array of snake head x, y, and d?)
+
+Collision detection:
+if hit apple move forward, call World.spawnApple
+if hit wall, endItAll
