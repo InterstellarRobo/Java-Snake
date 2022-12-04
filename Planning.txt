@@ -11,6 +11,8 @@ int getGameCoord
 int gameHeight
 int gameWidth
 void endItAll
+
+TODO: some game over boolean or smth
 }
 
 Snake {

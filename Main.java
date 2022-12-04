@@ -58,8 +58,8 @@ public class Main {
 
             testWorld.updateWorld();
             snake.placeSnakeHead();
-            //Whatever, fix tomorrow
             terminal.puts(Capability.clear_screen);
+            terminal.flush();
             testWorld.printWorld();
             
             Thread.sleep(1000);

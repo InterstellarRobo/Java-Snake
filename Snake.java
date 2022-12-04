@@ -62,7 +62,7 @@ public class Snake {
                     break;
             }
         }
-        //if the input is bad keep moving it the same way
+        //if the input is bad keep moving it the same way (not recursion in future?)
         else moveSnakeHead();
     }
 
