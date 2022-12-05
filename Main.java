@@ -1,7 +1,6 @@
 import java.io.*;
 import java.lang.Thread;
 import org.jline.terminal.*;
-import org.jline.utils.*;
 import org.jline.utils.InfoCmp.Capability;
 
 public class Main {
@@ -31,13 +30,13 @@ public class Main {
         Terminal terminal = TerminalBuilder.builder().jna(true).system(true).build();
         terminal.enterRawMode();
 
-        World testWorld = new World(15, 15);
-        Snake snake = new Snake (9, 3, 5, testWorld);
+        World world = new World(15, 15);
+        Snake snake = new Snake(9, 3, 5, world);
 
         Thread t = new Thread(new InputThread(terminal));
         t.start();
 
-        while (input != 'q') {
+        while (input != 'q' && world.checkGameOver() == false) {
             switch (input) {
                 case 'w':
                     snake.moveSnakeHead(Direction.UP);
@@ -56,14 +55,18 @@ public class Main {
                     break;
             }
 
-            testWorld.updateWorld();
+            world.updateWorld();
             snake.placeSnakeHead();
             terminal.puts(Capability.clear_screen);
             terminal.flush();
-            testWorld.printWorld();
+            System.out.println("Score: " + snake.getLength());
+            world.renderWorld(snake);
             
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }
+
+        System.out.println();
+        System.out.println("Game over! Score is " + snake.getLength());
 
         t.interrupt();
         t.join();

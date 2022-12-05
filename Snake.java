@@ -58,7 +58,7 @@ public class Snake {
                     w.setAppleEaten();
                     break;
                 default:
-                    System.out.println("Deal with this later");
+                    w.endGame();
                     break;
             }
         }
@@ -71,12 +71,24 @@ public class Snake {
     }
 
     public void placeSnakeHead() {
-        if (w.checkAppleEaten() == true) {
+        if (this.w.checkAppleEaten() == true) {
             this.length++;
-            w.setGameCoord(this.headX, this.headY, this.length);
-            w.spawnApple();
-            w.resetAppleEaten();
+            this.w.setGameCoord(this.headX, this.headY, this.length);
+            this.w.spawnApple();
+            this.w.resetAppleEaten();
         }
-        else w.setGameCoord(this.headX, this.headY, this.length);
+        else this.w.setGameCoord(this.headX, this.headY, this.length);
+    }
+
+    public int getHeadX() {
+        return this.headX;
+    }
+
+    public int getHeadY() {
+        return this.headY;
+    }
+
+    public int getLength() {
+        return this.length;
     }
 }

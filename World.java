@@ -3,6 +3,7 @@ import java.util.Arrays;
 public class World {
     private int[][] worldArray;
     private boolean appleEaten = false;
+    private boolean worldOver = false;
 
     public World(int playSizeX, int playSizeY) {
         worldArray = new int[playSizeY + 2][playSizeX + 2];
@@ -32,6 +33,37 @@ public class World {
         for (int y = 0; y < worldArray.length; y++) {
             for (int x = 0; x < worldArray[y].length; x++) {
                 System.out.print(worldArray[y][x] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void renderWorld(Snake... snakes) {
+        for (int y = 0; y < worldArray.length; y++) {
+            System.out.print("\t");
+            for (int x = 0; x < worldArray[y].length; x++) {
+                s:
+                switch (worldArray[y][x]) {
+                    case -2:
+                        System.out.print("🍎");
+                        break;
+                    case -1:
+                        System.out.print("⬜");
+                        break;
+                    case 0:
+                        System.out.print("⬛");
+                        break;
+                    default:
+                        for (Snake snake:snakes) {
+                            if (snake.getHeadX() + 1 == x && snake.getHeadY() + 1 == y){
+                                System.out.print("👴");
+                                break s;
+                            }
+                        }
+                        System.out.print("🟩");
+                        
+                        break;
+                }
             }
             System.out.println();
         }
@@ -89,5 +121,13 @@ public class World {
                 }
             }
         }
+    }
+
+    public void endGame() {
+        worldOver = true;
+    }
+
+    public boolean checkGameOver() {
+        return worldOver;
     }
 }
