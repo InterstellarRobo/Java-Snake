@@ -26,12 +26,13 @@ public class Main {
             }
         }
     }
+
     public static void main(String[] args) throws InterruptedException, IOException{
         Terminal terminal = TerminalBuilder.builder().jna(true).system(true).build();
         terminal.enterRawMode();
 
         World world = new World(15, 15);
-        Snake snake = new Snake(9, 3, 5, world);
+        Snake snake = new Snake(5, 3, 5, world);
 
         Thread t = new Thread(new InputThread(terminal));
         t.start();
@@ -60,9 +61,9 @@ public class Main {
             terminal.puts(Capability.clear_screen);
             terminal.flush();
             System.out.println("Score: " + snake.getLength());
-            world.renderWorld(snake);
+            System.out.println(world.renderWorld(snake));
             
-            Thread.sleep(500);
+            Thread.sleep(750);
         }
 
         System.out.println();

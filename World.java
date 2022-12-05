@@ -38,35 +38,37 @@ public class World {
         }
     }
 
-    public void renderWorld(Snake... snakes) {
+    public String renderWorld(Snake... snakes) {
+        String output = "";
         for (int y = 0; y < worldArray.length; y++) {
-            System.out.print("\t");
+            output += "\t";
             for (int x = 0; x < worldArray[y].length; x++) {
                 s:
                 switch (worldArray[y][x]) {
                     case -2:
-                        System.out.print("🍎");
+                        output += "🍎";
                         break;
                     case -1:
-                        System.out.print("⬜");
+                        output += "⬜";
                         break;
                     case 0:
-                        System.out.print("⬛");
+                        output += "⬛";
                         break;
                     default:
                         for (Snake snake:snakes) {
                             if (snake.getHeadX() + 1 == x && snake.getHeadY() + 1 == y){
-                                System.out.print("👴");
+                                output += "👴";
                                 break s;
                             }
                         }
-                        System.out.print("🟩");
+                        output += "🟩";
                         
                         break;
                 }
             }
-            System.out.println();
+            output += "\n";
         }
+        return output;
     }
 
     public int gameWidth() {
