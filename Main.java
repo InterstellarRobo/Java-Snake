@@ -38,6 +38,8 @@ public class Main {
         t.start();
 
         while (input != 'q' && world.checkGameOver() == false) {
+            world.updateWorld();
+            
             switch (input) {
                 case 'w':
                     snake.moveSnakeHead(Direction.UP);
@@ -56,7 +58,6 @@ public class Main {
                     break;
             }
 
-            world.updateWorld();
             snake.placeSnakeHead();
             terminal.puts(Capability.clear_screen);
             terminal.flush();
