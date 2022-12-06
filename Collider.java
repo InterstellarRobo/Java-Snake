@@ -8,6 +8,7 @@ public enum Collider {
             case -1:
                 return WALL;
             case 0:
+            case 1:
                 return EMPTY;
         }
         
